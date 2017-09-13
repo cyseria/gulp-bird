@@ -8,22 +8,30 @@
 import VConsole from './core/core.js';
 import VConsolePlugin from './lib/plugin.js';
 // built-in tabs
-import VConsoleDefaultTab from './log/default.js';
-import VConsoleSystemTab from './log/system.js';
-import VConsoleNetworkTab from './network/network.js';
+import DefaultTab from './log/default.js';
+import SystemTab from './log/system.js';
+import NetworkTab from './network/network.js';
 
 // here we go
 const vConsole = new VConsole();
 
-const defaultTab = new VConsoleDefaultTab('default', 'Log');
-vConsole.addPlugin(defaultTab);
+const plugin = {
+  DefaultTab: DefaultTab,
+  SystemTab: SystemTab,
+  NetworkTab: NetworkTab
+}
 
-const systemTab = new VConsoleSystemTab('system', 'System');
-vConsole.addPlugin(systemTab);
+const defaultTab = new DefaultTab('default', 'Log'); 
+vConsole.addPlugin(defaultTab); 
 
-const networkTab = new VConsoleNetworkTab('network', 'Network');
-vConsole.addPlugin(networkTab);
+const systemTab = new SystemTab('system','System'); 
+vConsole.addPlugin(systemTab); 
+
+function addPlugin(plugin) {
+  vConsole.addPlugin(plugin); 
+}
 
 // export
 vConsole.VConsolePlugin = VConsolePlugin;
-export default vConsole;
+
+export default {addPlugin, plugin};
