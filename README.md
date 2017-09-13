@@ -103,6 +103,20 @@ targetServer
     node config.js
 ```
 
+#### toolsConf 配置
+
+```
+var toolsConf = {
+    weinre: {
+        open: true, // weinre 开关，打开之后 console 的 networkTab 会自动关闭
+        port: 9001
+    },
+    showTools: true
+};
+```
+
+目前包含 强制刷新，二维码和 console 调试三个功能，暂不支持自定义配置。
+
 ### 如何开发和贡献代码
 
 ```sh
