@@ -25,9 +25,6 @@ class VConsoleStorage extends VConsolePlugin {
     this.isReady = false;
     this.isShow = false;
     this.isInBottom = true; // whether the panel is in the bottom
-    this._open = undefined; // the origin function
-    this._send = undefined;
-
   }
 
   onRenderTab(callback) {
@@ -52,6 +49,8 @@ class VConsoleStorage extends VConsolePlugin {
 
     // header
     this.renderHeader();
+
+    this.updateStorage();
 
   }
 
@@ -82,9 +81,9 @@ class VConsoleStorage extends VConsolePlugin {
   }
 
   renderHeader() {
-    let count = Object.keys(this.reqList).length,
-      $header = $.render(tplHeader, { count: count }),
+    let $header = $.render(tplHeader, {}),
       $logbox = $.one('.vc-log', this.$tabbox);
+
     if (this.$header) {
       // update
       this.$header.parentNode.replaceChild($header, this.$header);
@@ -95,11 +94,25 @@ class VConsoleStorage extends VConsolePlugin {
     this.$header = $header;
   }
 
+  updateStorage() {
+    console.log('123');
+    const domData =
+      {
+        type: 'locakstorage',
+        key: 'birdTools_X',
+        val: '0',
+      };
+
+    for (let i = 0; i < localStorage.length; i++) {
+      const $new = $.render(tplItem, domData);
+      $.one('.vc-log', this.$tabbox).insertAdjacentElement('beforeend', $new);
+    }
+    this.renderHeader();
+  }
+
   clearLog() {
   }
 
-  renderHeader() {
-  }
 
 } // END class
 
